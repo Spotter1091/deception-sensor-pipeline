@@ -1,21 +1,30 @@
-from pipeline.models.cluster import Cluster
+from datetime import UTC, datetime
+
+from pipeline.ioc.ioc import IOC
 from pipeline.stix.stix_builder import STIXBuilder
 
 
 def test_build_indicator():
 
-    cluster = Cluster(
-        cluster_id="cluster-1",
-        protocol="telnet",
-        source_ip="203.0.113.5",
-        session_count=7,
+    ioc = IOC(
+        indicator_type="ip",
+        value="203.0.113.5",
+        first_seen=datetime.now(UTC),
+        last_seen=datetime.now(UTC),
+        source_count=1,
+        confidence=50,
+        metadata={},
     )
 
-    bundle = STIXBuilder().build([cluster])
+    bundle = STIXBuilder().build([ioc])
 
-    assert len(bundle) == 1
+    assert bundle["type"] == "bundle"
 
-    indicator = bundle[0]
+    assert bundle["spec_version"] == "2.1"
+
+    assert len(bundle["objects"]) == 1
+
+    indicator = bundle["objects"][0]
 
     assert indicator["type"] == "indicator"
 
@@ -24,5 +33,5 @@ def test_build_indicator():
     )
 
     assert indicator["labels"] == [
-        "telnet",
+        "ip",
     ]

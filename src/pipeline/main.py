@@ -1,11 +1,9 @@
 from pathlib import Path
 
-from pipeline.exporters.csv_exporter import CSVExporter
-from pipeline.exporters.json_exporter import JSONExporter
-from pipeline.exporters.parquet_exporter import ParquetExporter
-from pipeline.artifacts.artifact_manager import ArtifactManager
 from pipeline.adapters.replay_adapter import ReplayAdapter
+from pipeline.artifacts.artifact_manager import ArtifactManager
 from pipeline.clustering.cluster_engine import ClusterEngine
+from pipeline.ioc.ioc_engine import IOCEngine
 from pipeline.payloads.hash_engine import HashEngine
 from pipeline.provenance.provenance_tracker import ProvenanceTracker
 from pipeline.sessionization.session_engine import SessionEngine
@@ -33,14 +31,20 @@ def main() -> None:
 
     cluster_engine = ClusterEngine()
 
-    clusters = ClusterEngine().build_clusters(sessions)
+    clusters = cluster_engine.build_clusters(sessions)
 
     print(f"Built {len(clusters):,} clusters")
 
     print("[4/5] Building payload ledger...")
 
     ledger = HashEngine().build_hash_ledger(events)
+    
+    print("[4.5/5] Extracting IOCs...")
 
+    iocs = IOCEngine().extract(events)
+
+    print(f"Extracted {len(iocs):,} unique IP indicators")
+	
     output_dir = Path("derived")
 
     output_dir.mkdir(
@@ -51,10 +55,9 @@ def main() -> None:
         output_directory=Path("derived"),
     ).export_all(
         ledger=ledger,
-
         clusters=clusters,
-
         sessions=sessions,
+        iocs=iocs,
     )
 
     print("Artifacts exported.")

@@ -1,7 +1,7 @@
 from __future__ import annotations
 
 from datetime import datetime
-from typing import Any, Optional
+from typing import Any
 
 from pydantic import BaseModel, Field
 
@@ -27,30 +27,30 @@ class NormalizedEvent(BaseModel):
 
     # ---------- Session ----------
 
-    connection_id: Optional[str] = None
+    connection_id: str | None = None
 
     # ---------- Network ----------
 
     protocol: str
 
     source_ip: str
-    source_port: Optional[int] = None
+    source_port: int | None = None
 
     destination_ip: str = "unknown"
-    destination_port: Optional[int] = None
+    destination_port: int | None = None
 
     # ---------- Credentials ----------
 
-    username: Optional[str] = None
-    password: Optional[str] = None
+    username: str | None = None
+    password: str | None = None
 
     # ---------- Payload ----------
 
-    payload_sha256: Optional[str] = None
-    payload_md5: Optional[str] = None
-    payload_size: Optional[int] = None
+    payload_sha256: str | None = None
+    payload_md5: str | None = None
+    payload_size: int | None = None
 
-    quarantine_path: Optional[str] = None
+    quarantine_path: str | None = None
 
     # ---------- Provenance ----------
 
@@ -60,9 +60,9 @@ class NormalizedEvent(BaseModel):
 
     # ---------- Enrichment ----------
 
-    attack_technique: Optional[str] = None
+    attack_technique: str | None = None
 
-    reputation: Optional[str] = None
+    reputation: str | None = None
 
     # ---------- Metadata ----------
 

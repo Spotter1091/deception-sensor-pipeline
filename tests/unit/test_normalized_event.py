@@ -1,6 +1,4 @@
-from datetime import datetime, UTC
-
-datetime.now(UTC)
+from datetime import UTC, datetime
 
 from pipeline.models.event import NormalizedEvent
 
@@ -10,8 +8,8 @@ def test_create_normalized_event():
     event = NormalizedEvent(
         event_id="1",
         source_adapter="replay",
-        sensor_time=datetime.utcnow(),
-        normalized_time=datetime.utcnow(),
+        sensor_time=datetime.now(UTC),
+        normalized_time=datetime.now(UTC),
         protocol="ssh",
         source_ip="1.1.1.1",
         destination_ip="2.2.2.2",

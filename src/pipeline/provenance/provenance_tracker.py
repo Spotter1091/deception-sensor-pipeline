@@ -27,8 +27,5 @@ class ProvenanceTracker:
 
         return {
             "session_id": session.session_id,
-            "events": [
-                self.event_to_record(event)
-                for event in session.events
-            ],
+            "events": [self.event_to_record(event) for event in session.events],
         }

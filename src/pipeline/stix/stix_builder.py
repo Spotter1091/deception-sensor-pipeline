@@ -1,44 +1,35 @@
 from __future__ import annotations
 
-from typing import Iterable
+from collections.abc import Iterable
 
-from pipeline.models.cluster import Cluster
+from pipeline.ioc.ioc import IOC
+from pipeline.stix.bundle_builder import BundleBuilder
+from pipeline.stix.indicator_builder import IndicatorBuilder
 
 
 class STIXBuilder:
     """
-    Builds STIX-like objects from clusters.
-
-    We'll evolve this into a complete STIX 2.1 builder
-    over the next milestones.
+    Build a complete STIX Bundle
+    from extracted IOCs.
     """
+
+    def __init__(self) -> None:
+
+        self.indicator_builder = IndicatorBuilder()
+
+        self.bundle_builder = BundleBuilder()
 
     def build(
         self,
-        clusters: Iterable[Cluster],
-    ) -> list[dict]:
-
-        return [
-            self._cluster_indicator(cluster)
-            for cluster in clusters
-        ]
-
-    def _cluster_indicator(
-        self,
-        cluster: Cluster,
+        iocs: Iterable[IOC],
     ) -> dict:
 
-        return {
-            "type": "indicator",
-            "name": f"Cluster {cluster.cluster_id}",
-            "pattern_type": "stix",
-            "pattern": (
-                f"[ipv4-addr:value = '{cluster.source_ip}']"
-            ),
-            "labels": [
-                cluster.protocol,
-            ],
-            "description": (
-                f"{cluster.session_count} sessions"
-            ),
-        }
+        indicators = []
+
+        for ioc in iocs:
+
+            indicators.append(
+                self.indicator_builder.build(ioc)
+            )
+
+        return self.bundle_builder.build(indicators)

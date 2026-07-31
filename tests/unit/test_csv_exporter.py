@@ -7,7 +7,6 @@ from pipeline.models.payload import PayloadRecord
 def test_export_csv(tmp_path: Path):
 
     ledger = [
-
         PayloadRecord(
             sha256="deadbeef",
             source_event="1",
@@ -15,7 +14,6 @@ def test_export_csv(tmp_path: Path):
             source_ip="8.8.8.8",
             payload_size=123,
         )
-
     ]
 
     outfile = tmp_path / "ledger.csv"

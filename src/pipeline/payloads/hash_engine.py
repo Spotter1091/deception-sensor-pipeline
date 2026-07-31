@@ -22,21 +22,13 @@ class HashEngine:
                 continue
 
             ledger.append(
-
                 PayloadRecord(
-
                     sha256=event.payload_sha256,
-
                     source_event=event.event_id,
-
                     protocol=event.protocol,
-
                     source_ip=event.source_ip,
-
                     payload_size=event.payload_size,
-
                 )
-
             )
 
         return ledger

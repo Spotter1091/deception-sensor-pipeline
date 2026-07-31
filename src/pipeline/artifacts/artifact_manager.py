@@ -24,18 +24,17 @@ class ArtifactManager:
         )
 
         self.registry = ExportRegistry()
-       
 
     def export_all(
         self,
         *,
         ledger,
         clusters,
+        iocs,
         sessions,
     ) -> None:
 
-        stix_bundle = STIXBuilder().build(clusters)
-
+        stix_bundle = STIXBuilder().build(iocs)
 
         for exporter, filename in self.registry.exporters:
 
@@ -52,3 +51,5 @@ class ArtifactManager:
 
             elif filename == "stix-bundle.json":
                 exporter.export(output, stix_bundle)
+            elif filename == "iocs.csv":
+                exporter.export(output, iocs)

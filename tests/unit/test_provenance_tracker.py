@@ -11,16 +11,11 @@ def test_session_lineage():
         event_id="1",
         schema_version="1",
         source_adapter="replay",
-
         sensor_time=datetime.now(UTC),
         normalized_time=datetime.now(UTC),
-
         protocol="telnet",
-
         source_ip="1.1.1.1",
-
         destination_ip="unknown",
-
         raw_file="replay.jsonl",
         raw_locator="line-42",
     )
@@ -28,14 +23,10 @@ def test_session_lineage():
     session = Session(
         session_id="abc",
         protocol="telnet",
-
         source_ip="1.1.1.1",
-
         start_time=event.sensor_time,
         end_time=event.sensor_time,
-
         events=[event],
-
         event_count=1,
     )
 

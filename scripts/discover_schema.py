@@ -2,7 +2,6 @@ import json
 from collections import Counter
 from pathlib import Path
 
-
 fields = set()
 
 replay = Path("replay/raw/honeypot-replay.jsonl")

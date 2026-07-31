@@ -45,15 +45,10 @@ class ClusterEngine:
 
             cluster = Cluster(
                 cluster_id=f"{protocol}:{source_ip}:{username}",
-
                 protocol=protocol,
-
                 source_ip=source_ip,
-
                 username=username,
-
                 sessions=grouped_sessions,
-
                 session_count=len(grouped_sessions),
             )
 
@@ -66,7 +61,4 @@ class ClusterEngine:
         clusters: list[Cluster],
     ) -> list[dict]:
 
-        return [
-            cluster.model_dump(mode="json")
-            for cluster in clusters
-        ]
+        return [cluster.model_dump(mode="json") for cluster in clusters]

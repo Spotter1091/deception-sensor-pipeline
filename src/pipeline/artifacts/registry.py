@@ -1,12 +1,12 @@
 from __future__ import annotations
 
-from pathlib import Path
 from typing import Any
 
-from pipeline.exporters.stix_exporter import STIXExporter
 from pipeline.exporters.csv_exporter import CSVExporter
+from pipeline.exporters.ioc_csv_exporter import IOCCSVExporter
 from pipeline.exporters.json_exporter import JSONExporter
 from pipeline.exporters.parquet_exporter import ParquetExporter
+from pipeline.exporters.stix_exporter import STIXExporter
 
 
 class ExportRegistry:
@@ -23,6 +23,7 @@ class ExportRegistry:
             (JSONExporter(), "clusters.json"),
             (ParquetExporter(), "sessions.parquet"),
             (STIXExporter(), "stix-bundle.json"),
+            (IOCCSVExporter(), "iocs.csv"),
         ]
 
     @property

@@ -1,7 +1,6 @@
 from abc import ABC, abstractmethod
 from collections.abc import Iterator
 
-
 from pipeline.models.event import NormalizedEvent
 
 
