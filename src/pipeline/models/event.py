@@ -23,7 +23,7 @@ class NormalizedEvent(BaseModel):
     # ---------- Time ----------
 
     sensor_time: datetime
-    pipeline_run_time = datetime.now(UTC)
+    normalized_time: datetime
 
     # ---------- Session ----------
 
