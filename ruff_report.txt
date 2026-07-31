@@ -1,0 +1,533 @@
+I001 [*] Import block is un-sorted or un-formatted
+ --> scripts/discover_schema.py:1:1
+  |
+1 | / from pathlib import Path
+2 | |
+3 | | from collections import Counter
+4 | |
+5 | | import json
+  | |___________^
+6 |
+7 |   fields = set()
+  |
+help: Organize imports
+  |
+1 + import json
+2 + from collections import Counter
+3 | from pathlib import Path
+  -
+  - from collections import Counter
+  -
+  - import json
+4 |
+  |
+
+UP035 [*] Import from `collections.abc` instead: `Iterator`
+ --> src/pipeline/adapters/base.py:2:1
+  |
+1 | from abc import ABC, abstractmethod
+2 | from typing import Iterator
+  | ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+3 |
+4 | from pipeline.models.event import NormalizedEvent
+  |
+help: Import from `collections.abc`
+  |
+1 | from abc import ABC, abstractmethod
+  - from typing import Iterator
+2 + from collections.abc import Iterator
+3 |
+  |
+
+I001 [*] Import block is un-sorted or un-formatted
+  --> src/pipeline/adapters/replay_adapter.py:1:1
+   |
+ 1 | / from __future__ import annotations
+ 2 | | from pathlib import Path
+ 3 | |
+ 4 | | from typing import Any
+ 5 | |
+ 6 | | import json
+ 7 | | from datetime import UTC, datetime
+ 8 | | from pathlib import Path
+ 9 | | from typing import Any, Iterator
+10 | |
+11 | |
+12 | | from pipeline.adapters.base import BaseAdapter
+13 | | from pipeline.models.event import NormalizedEvent
+   | |_________________________________________________^
+help: Organize imports
+  |
+1 | from __future__ import annotations
+  - from pathlib import Path
+  -
+  - from typing import Any
+2 |
+--------------------------------------------------------------------------------
+6 | from typing import Any, Iterator
+  -
+7 |
+  |
+
+F811 [*] Redefinition of unused `Path` from line 2
+ --> src/pipeline/adapters/replay_adapter.py:8:21
+  |
+6 | import json
+7 | from datetime import UTC, datetime
+8 | from pathlib import Path
+  |                     ^^^^ `Path` redefined here
+9 | from typing import Any, Iterator
+  |
+ ::: src/pipeline/adapters/replay_adapter.py:2:21
+  |
+1 | from __future__ import annotations
+2 | from pathlib import Path
+  |                     ---- previous definition of `Path` here
+3 |
+4 | from typing import Any
+  |
+help: Remove definition: `Path`
+  |
+7 | from datetime import UTC, datetime
+  - from pathlib import Path
+8 | from typing import Any, Iterator
+  |
+
+UP035 [*] Import from `collections.abc` instead: `Iterator`
+ --> src/pipeline/adapters/replay_adapter.py:9:1
+  |
+7 | from datetime import UTC, datetime
+8 | from pathlib import Path
+9 | from typing import Any, Iterator
+  | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+help: Import from `collections.abc`
+   |
+8  | from pathlib import Path
+   - from typing import Any, Iterator
+9  + from typing import Any
+10 + from collections.abc import Iterator
+11 |
+   |
+
+F811 [*] Redefinition of unused `Any` from line 4
+ --> src/pipeline/adapters/replay_adapter.py:9:20
+  |
+2 | from pathlib import Path
+3 |
+4 | from typing import Any
+  |                    --- previous definition of `Any` here
+5 |
+6 | import json
+7 | from datetime import UTC, datetime
+8 | from pathlib import Path
+9 | from typing import Any, Iterator
+  |                    ^^^ `Any` redefined here
+help: Remove definition: `Any`
+   |
+8  | from pathlib import Path
+   - from typing import Any, Iterator
+9  + from typing import Iterator
+10 |
+   |
+
+F401 [*] `typing.Iterator` imported but unused
+ --> src/pipeline/adapters/replay_adapter.py:9:25
+  |
+7 | from datetime import UTC, datetime
+8 | from pathlib import Path
+9 | from typing import Any, Iterator
+  |                         ^^^^^^^^
+help: Remove unused import: `typing.Iterator`
+   |
+8  | from pathlib import Path
+   - from typing import Any, Iterator
+9  + from typing import Any
+10 |
+   |
+
+I001 [*] Import block is un-sorted or un-formatted
+ --> src/pipeline/artifacts/registry.py:1:1
+  |
+1 | / from __future__ import annotations
+2 | |
+3 | | from pathlib import Path
+4 | | from typing import Any
+5 | |
+6 | | from pipeline.exporters.stix_exporter import STIXExporter
+7 | | from pipeline.exporters.csv_exporter import CSVExporter
+8 | | from pipeline.exporters.json_exporter import JSONExporter
+9 | | from pipeline.exporters.parquet_exporter import ParquetExporter
+  | |_______________________________________________________________^
+help: Organize imports
+   |
+5  |
+   - from pipeline.exporters.stix_exporter import STIXExporter
+6  | from pipeline.exporters.csv_exporter import CSVExporter
+7  | from pipeline.exporters.json_exporter import JSONExporter
+8  | from pipeline.exporters.parquet_exporter import ParquetExporter
+9  + from pipeline.exporters.stix_exporter import STIXExporter
+10 |
+   |
+
+F401 [*] `pathlib.Path` imported but unused
+ --> src/pipeline/artifacts/registry.py:3:21
+  |
+1 | from __future__ import annotations
+2 |
+3 | from pathlib import Path
+  |                     ^^^^
+4 | from typing import Any
+  |
+help: Remove unused import: `pathlib.Path`
+  |
+2 |
+  - from pathlib import Path
+3 | from typing import Any
+  |
+
+I001 [*] Import block is un-sorted or un-formatted
+  --> src/pipeline/main.py:1:1
+   |
+ 1 | / from pathlib import Path
+ 2 | |
+ 3 | | from pipeline.exporters.csv_exporter import CSVExporter
+ 4 | | from pipeline.exporters.json_exporter import JSONExporter
+ 5 | | from pipeline.exporters.parquet_exporter import ParquetExporter
+ 6 | | from pipeline.artifacts.artifact_manager import ArtifactManager
+ 7 | | from pipeline.adapters.replay_adapter import ReplayAdapter
+ 8 | | from pipeline.clustering.cluster_engine import ClusterEngine
+ 9 | | from pipeline.payloads.hash_engine import HashEngine
+10 | | from pipeline.provenance.provenance_tracker import ProvenanceTracker
+11 | | from pipeline.sessionization.session_engine import SessionEngine
+   | |________________________________________________________________^
+help: Organize imports
+  |
+2 |
+3 + from pipeline.adapters.replay_adapter import ReplayAdapter
+4 + from pipeline.artifacts.artifact_manager import ArtifactManager
+5 + from pipeline.clustering.cluster_engine import ClusterEngine
+6 | from pipeline.exporters.csv_exporter import CSVExporter
+7 | from pipeline.exporters.json_exporter import JSONExporter
+8 | from pipeline.exporters.parquet_exporter import ParquetExporter
+  - from pipeline.artifacts.artifact_manager import ArtifactManager
+  - from pipeline.adapters.replay_adapter import ReplayAdapter
+  - from pipeline.clustering.cluster_engine import ClusterEngine
+9 | from pipeline.payloads.hash_engine import HashEngine
+  |
+
+F401 [*] `pipeline.exporters.csv_exporter.CSVExporter` imported but unused
+ --> src/pipeline/main.py:3:45
+  |
+1 | from pathlib import Path
+2 |
+3 | from pipeline.exporters.csv_exporter import CSVExporter
+  |                                             ^^^^^^^^^^^
+4 | from pipeline.exporters.json_exporter import JSONExporter
+5 | from pipeline.exporters.parquet_exporter import ParquetExporter
+  |
+help: Remove unused import: `pipeline.exporters.csv_exporter.CSVExporter`
+  |
+2 |
+  - from pipeline.exporters.csv_exporter import CSVExporter
+3 | from pipeline.exporters.json_exporter import JSONExporter
+  |
+
+F401 [*] `pipeline.exporters.json_exporter.JSONExporter` imported but unused
+ --> src/pipeline/main.py:4:46
+  |
+3 | from pipeline.exporters.csv_exporter import CSVExporter
+4 | from pipeline.exporters.json_exporter import JSONExporter
+  |                                              ^^^^^^^^^^^^
+5 | from pipeline.exporters.parquet_exporter import ParquetExporter
+6 | from pipeline.artifacts.artifact_manager import ArtifactManager
+  |
+help: Remove unused import: `pipeline.exporters.json_exporter.JSONExporter`
+  |
+3 | from pipeline.exporters.csv_exporter import CSVExporter
+  - from pipeline.exporters.json_exporter import JSONExporter
+4 | from pipeline.exporters.parquet_exporter import ParquetExporter
+  |
+
+F401 [*] `pipeline.exporters.parquet_exporter.ParquetExporter` imported but unused
+ --> src/pipeline/main.py:5:49
+  |
+3 | from pipeline.exporters.csv_exporter import CSVExporter
+4 | from pipeline.exporters.json_exporter import JSONExporter
+5 | from pipeline.exporters.parquet_exporter import ParquetExporter
+  |                                                 ^^^^^^^^^^^^^^^
+6 | from pipeline.artifacts.artifact_manager import ArtifactManager
+7 | from pipeline.adapters.replay_adapter import ReplayAdapter
+  |
+help: Remove unused import: `pipeline.exporters.parquet_exporter.ParquetExporter`
+  |
+4 | from pipeline.exporters.json_exporter import JSONExporter
+  - from pipeline.exporters.parquet_exporter import ParquetExporter
+5 | from pipeline.artifacts.artifact_manager import ArtifactManager
+  |
+
+F841 Local variable `cluster_engine` is assigned to but never used
+  --> src/pipeline/main.py:34:5
+   |
+32 |     print("[3/5] Building clusters...")
+33 |
+34 |     cluster_engine = ClusterEngine()
+   |     ^^^^^^^^^^^^^^
+35 |
+36 |     clusters = ClusterEngine().build_clusters(sessions)
+   |
+help: Remove assignment to unused variable `cluster_engine`
+
+UP045 [*] Use `X | None` for type annotations
+  --> src/pipeline/models/event.py:30:20
+   |
+28 |     # ---------- Session ----------
+29 |
+30 |     connection_id: Optional[str] = None
+   |                    ^^^^^^^^^^^^^
+31 |
+32 |     # ---------- Network ----------
+   |
+help: Convert to `X | None`
+   |
+29 |
+   -     connection_id: Optional[str] = None
+30 +     connection_id: str | None = None
+31 |
+   |
+
+UP045 [*] Use `X | None` for type annotations
+  --> src/pipeline/models/event.py:37:18
+   |
+36 |     source_ip: str
+37 |     source_port: Optional[int] = None
+   |                  ^^^^^^^^^^^^^
+38 |
+39 |     destination_ip: str = "unknown"
+   |
+help: Convert to `X | None`
+   |
+36 |     source_ip: str
+   -     source_port: Optional[int] = None
+37 +     source_port: int | None = None
+38 |
+   |
+
+UP045 [*] Use `X | None` for type annotations
+  --> src/pipeline/models/event.py:40:23
+   |
+39 |     destination_ip: str = "unknown"
+40 |     destination_port: Optional[int] = None
+   |                       ^^^^^^^^^^^^^
+41 |
+42 |     # ---------- Credentials ----------
+   |
+help: Convert to `X | None`
+   |
+39 |     destination_ip: str = "unknown"
+   -     destination_port: Optional[int] = None
+40 +     destination_port: int | None = None
+41 |
+   |
+
+UP045 [*] Use `X | None` for type annotations
+  --> src/pipeline/models/event.py:44:15
+   |
+42 |     # ---------- Credentials ----------
+43 |
+44 |     username: Optional[str] = None
+   |               ^^^^^^^^^^^^^
+45 |     password: Optional[str] = None
+   |
+help: Convert to `X | None`
+   |
+43 |
+   -     username: Optional[str] = None
+44 +     username: str | None = None
+45 |     password: Optional[str] = None
+   |
+
+UP045 [*] Use `X | None` for type annotations
+  --> src/pipeline/models/event.py:45:15
+   |
+44 |     username: Optional[str] = None
+45 |     password: Optional[str] = None
+   |               ^^^^^^^^^^^^^
+46 |
+47 |     # ---------- Payload ----------
+   |
+help: Convert to `X | None`
+   |
+44 |     username: Optional[str] = None
+   -     password: Optional[str] = None
+45 +     password: str | None = None
+46 |
+   |
+
+UP045 [*] Use `X | None` for type annotations
+  --> src/pipeline/models/event.py:49:21
+   |
+47 |     # ---------- Payload ----------
+48 |
+49 |     payload_sha256: Optional[str] = None
+   |                     ^^^^^^^^^^^^^
+50 |     payload_md5: Optional[str] = None
+51 |     payload_size: Optional[int] = None
+   |
+help: Convert to `X | None`
+   |
+48 |
+   -     payload_sha256: Optional[str] = None
+49 +     payload_sha256: str | None = None
+50 |     payload_md5: Optional[str] = None
+   |
+
+UP045 [*] Use `X | None` for type annotations
+  --> src/pipeline/models/event.py:50:18
+   |
+49 |     payload_sha256: Optional[str] = None
+50 |     payload_md5: Optional[str] = None
+   |                  ^^^^^^^^^^^^^
+51 |     payload_size: Optional[int] = None
+   |
+help: Convert to `X | None`
+   |
+49 |     payload_sha256: Optional[str] = None
+   -     payload_md5: Optional[str] = None
+50 +     payload_md5: str | None = None
+51 |     payload_size: Optional[int] = None
+   |
+
+UP045 [*] Use `X | None` for type annotations
+  --> src/pipeline/models/event.py:51:19
+   |
+49 |     payload_sha256: Optional[str] = None
+50 |     payload_md5: Optional[str] = None
+51 |     payload_size: Optional[int] = None
+   |                   ^^^^^^^^^^^^^
+52 |
+53 |     quarantine_path: Optional[str] = None
+   |
+help: Convert to `X | None`
+   |
+50 |     payload_md5: Optional[str] = None
+   -     payload_size: Optional[int] = None
+51 +     payload_size: int | None = None
+52 |
+   |
+
+UP045 [*] Use `X | None` for type annotations
+  --> src/pipeline/models/event.py:53:22
+   |
+51 |     payload_size: Optional[int] = None
+52 |
+53 |     quarantine_path: Optional[str] = None
+   |                      ^^^^^^^^^^^^^
+54 |
+55 |     # ---------- Provenance ----------
+   |
+help: Convert to `X | None`
+   |
+52 |
+   -     quarantine_path: Optional[str] = None
+53 +     quarantine_path: str | None = None
+54 |
+   |
+
+UP045 [*] Use `X | None` for type annotations
+  --> src/pipeline/models/event.py:63:23
+   |
+61 |     # ---------- Enrichment ----------
+62 |
+63 |     attack_technique: Optional[str] = None
+   |                       ^^^^^^^^^^^^^
+64 |
+65 |     reputation: Optional[str] = None
+   |
+help: Convert to `X | None`
+   |
+62 |
+   -     attack_technique: Optional[str] = None
+63 +     attack_technique: str | None = None
+64 |
+   |
+
+UP045 [*] Use `X | None` for type annotations
+  --> src/pipeline/models/event.py:65:17
+   |
+63 |     attack_technique: Optional[str] = None
+64 |
+65 |     reputation: Optional[str] = None
+   |                 ^^^^^^^^^^^^^
+66 |
+67 |     # ---------- Metadata ----------
+   |
+help: Convert to `X | None`
+   |
+64 |
+   -     reputation: Optional[str] = None
+65 +     reputation: str | None = None
+66 |
+   |
+
+UP045 [*] Use `X | None` for type annotations
+  --> src/pipeline/models/session.py:27:20
+   |
+25 |     protocol: str
+26 |
+27 |     connection_id: Optional[str] = None
+   |                    ^^^^^^^^^^^^^
+28 |
+29 |     source_ip: str
+   |
+help: Convert to `X | None`
+   |
+26 |
+   -     connection_id: Optional[str] = None
+27 +     connection_id: str | None = None
+28 |
+   |
+
+UP035 [*] Import from `collections.abc` instead: `Iterable`
+ --> src/pipeline/stix/stix_builder.py:3:1
+  |
+1 | from __future__ import annotations
+2 |
+3 | from typing import Iterable
+  | ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+4 |
+5 | from pipeline.models.cluster import Cluster
+  |
+help: Import from `collections.abc`
+  |
+2 |
+  - from typing import Iterable
+3 + from collections.abc import Iterable
+4 |
+  |
+
+I001 [*] Import block is un-sorted or un-formatted
+ --> tests/unit/test_normalized_event.py:1:1
+  |
+1 | from datetime import datetime, UTC
+  | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+2 |
+3 | datetime.now(UTC)
+  |
+help: Organize imports
+  |
+  - from datetime import datetime, UTC
+1 + from datetime import UTC, datetime
+2 |
+  |
+
+E402 Module level import not at top of file
+ --> tests/unit/test_normalized_event.py:5:1
+  |
+3 | datetime.now(UTC)
+4 |
+5 | from pipeline.models.event import NormalizedEvent
+  | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+help: Move module level imports to top of file
+
+Found 29 errors.
+[*] 27 fixable with the `--fix` option (1 hidden fix can be enabled with the `--unsafe-fixes` option).

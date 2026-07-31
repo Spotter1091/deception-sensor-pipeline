@@ -1,13 +1,10 @@
 from __future__ import annotations
-from pathlib import Path
-
-from typing import Any
 
 import json
+from collections.abc import Iterator
 from datetime import UTC, datetime
 from pathlib import Path
-from typing import Any, Iterator
-
+from typing import Any
 
 from pipeline.adapters.base import BaseAdapter
 from pipeline.models.event import NormalizedEvent

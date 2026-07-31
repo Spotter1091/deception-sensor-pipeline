@@ -1,8 +1,7 @@
+import json
+from collections import Counter
 from pathlib import Path
 
-from collections import Counter
-
-import json
 
 fields = set()
 

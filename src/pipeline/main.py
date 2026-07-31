@@ -3,6 +3,7 @@ from pathlib import Path
 from pipeline.exporters.csv_exporter import CSVExporter
 from pipeline.exporters.json_exporter import JSONExporter
 from pipeline.exporters.parquet_exporter import ParquetExporter
+from pipeline.artifacts.artifact_manager import ArtifactManager
 from pipeline.adapters.replay_adapter import ReplayAdapter
 from pipeline.clustering.cluster_engine import ClusterEngine
 from pipeline.payloads.hash_engine import HashEngine
@@ -46,22 +47,17 @@ def main() -> None:
         exist_ok=True,
     )
 
-    CSVExporter().export(
-        output_dir / "hash-ledger.csv",
-        ledger,
+    ArtifactManager(
+        output_directory=Path("derived"),
+    ).export_all(
+        ledger=ledger,
+
+        clusters=clusters,
+
+        sessions=sessions,
     )
 
-    print("Exported hash-ledger.csv")
-
-    JSONExporter().export(
-        output_dir / "clusters.json",
-        cluster_engine.serialize(clusters),
-    )
-
-    ParquetExporter().export(
-        output_dir / "sessions.parquet",
-        sessions,
-    )
+    print("Artifacts exported.")
 
     print("Exported sessions.parquet")
 
