@@ -1,8 +1,13 @@
+from __future__ import annotations
 from pathlib import Path
 
-from typing import Iterator
+from typing import Any
 
 import json
+from datetime import UTC, datetime
+from pathlib import Path
+from typing import Any, Iterator
+
 
 from pipeline.adapters.base import BaseAdapter
 from pipeline.models.event import NormalizedEvent
@@ -21,29 +26,53 @@ class ReplayAdapter(BaseAdapter):
 
             for line in infile:
 
+                if not line.strip():
+                    continue
+
                 record = json.loads(line)
 
                 yield self._normalize(record)
-
+    
     def _normalize(
         self,
-        record: dict,
+        record: dict[str, Any],
     ) -> NormalizedEvent:
-        """
-        Convert one replay record into
-        a NormalizedEvent.
-        """
 
-        raise NotImplementedError
+        sensor_time = datetime.fromisoformat(
+            record["sensor_time"].replace("Z", "+00:00")
+    )
 
+        return NormalizedEvent(
+            event_id=record["event_id"],
+            schema_version=record["schema_version"],
+            source_adapter="replay",
 
-class ReplayAdapter:
-    """
-    Streams Stage 6 replay events from a JSONL file.
-    """
+            sensor_time=sensor_time,
+            normalized_time=datetime.now(UTC),
 
-    def __init__(self, replay_file: Path):
-        self.replay_file = replay_file
+            connection_id=record.get("connection_id"),
 
-    def events(self) -> Iterator[NormalizedEvent]:
-        raise NotImplementedError
+            protocol=record["protocol"],
+
+            source_ip=record["source_ip"],
+            source_port=record.get("source_port"),
+
+            destination_ip="unknown",
+            destination_port=record.get("destination_port"),
+
+            username=record.get("username"),
+
+            payload_sha256=record.get("payload_sha256"),
+            payload_size=record.get("bytes"),
+
+            raw_file=str(self.replay_file),
+            raw_locator=record["event_id"],
+
+             metadata={
+                "action": record.get("action"),
+                "command": record.get("command"),
+                "credential_fingerprint": record.get("credential_fingerprint"),
+                "marker": record.get("marker"),
+        },
+    )
+

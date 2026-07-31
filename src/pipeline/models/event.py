@@ -1,7 +1,7 @@
 from __future__ import annotations
 
 from datetime import datetime
-from typing import Optional
+from typing import Any, Optional
 
 from pydantic import BaseModel, Field
 
@@ -23,7 +23,7 @@ class NormalizedEvent(BaseModel):
     # ---------- Time ----------
 
     sensor_time: datetime
-    normalized_time: datetime
+    pipeline_run_time = datetime.now(UTC)
 
     # ---------- Session ----------
 
@@ -36,7 +36,7 @@ class NormalizedEvent(BaseModel):
     source_ip: str
     source_port: Optional[int] = None
 
-    destination_ip: str
+    destination_ip: str = "unknown"
     destination_port: Optional[int] = None
 
     # ---------- Credentials ----------
@@ -66,4 +66,4 @@ class NormalizedEvent(BaseModel):
 
     # ---------- Metadata ----------
 
-    metadata: dict = Field(default_factory=dict)
+    metadata: dict[str, Any] = Field(default_factory=dict)

@@ -3,10 +3,10 @@ from pathlib import Path
 from pipeline.adapters.replay_adapter import ReplayAdapter
 
 
-def test_create_adapter():
+def test_adapter_initializes():
 
-    adapter = ReplayAdapter(
-        Path("tests/fixtures/sample.jsonl")
-    )
+    replay = Path("replay/raw/honeypot-replay.jsonl")
 
-    assert adapter.replay_file.name == "sample.jsonl"
+    adapter = ReplayAdapter(replay)
+
+    assert adapter.replay_file == replay
