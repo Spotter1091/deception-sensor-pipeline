@@ -60,3 +60,13 @@ class ClusterEngine:
             clusters.append(cluster)
 
         return clusters
+
+    def serialize(
+        self,
+        clusters: list[Cluster],
+    ) -> list[dict]:
+
+        return [
+            cluster.model_dump(mode="json")
+            for cluster in clusters
+        ]

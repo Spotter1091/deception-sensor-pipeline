@@ -1,0 +1,41 @@
+# ===========================
+# Python
+# ===========================
+
+__pycache__/
+*.py[cod]
+.pytest_cache/
+.venv/
+*.egg-info/
+
+# ===========================
+# IDEs
+# ===========================
+
+.vscode/
+.idea/
+
+# ===========================
+# Generated pipeline outputs
+# ===========================
+
+derived/
+
+# Stage submissions (generated)
+Submission/
+
+# Replay datasets (can be regenerated or downloaded)
+replay/raw/
+
+# ===========================
+# Logs
+# ===========================
+
+*.log
+
+# ===========================
+# Operating System
+# ===========================
+
+.DS_Store
+Thumbs.db

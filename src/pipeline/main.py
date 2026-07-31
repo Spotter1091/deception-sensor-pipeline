@@ -1,5 +1,8 @@
 from pathlib import Path
 
+from pipeline.exporters.csv_exporter import CSVExporter
+from pipeline.exporters.json_exporter import JSONExporter
+from pipeline.exporters.parquet_exporter import ParquetExporter
 from pipeline.adapters.replay_adapter import ReplayAdapter
 from pipeline.clustering.cluster_engine import ClusterEngine
 from pipeline.payloads.hash_engine import HashEngine
@@ -27,6 +30,8 @@ def main() -> None:
 
     print("[3/5] Building clusters...")
 
+    cluster_engine = ClusterEngine()
+
     clusters = ClusterEngine().build_clusters(sessions)
 
     print(f"Built {len(clusters):,} clusters")
@@ -34,6 +39,33 @@ def main() -> None:
     print("[4/5] Building payload ledger...")
 
     ledger = HashEngine().build_hash_ledger(events)
+
+    output_dir = Path("derived")
+
+    output_dir.mkdir(
+        exist_ok=True,
+    )
+
+    CSVExporter().export(
+        output_dir / "hash-ledger.csv",
+        ledger,
+    )
+
+    print("Exported hash-ledger.csv")
+
+    JSONExporter().export(
+        output_dir / "clusters.json",
+        cluster_engine.serialize(clusters),
+    )
+
+    ParquetExporter().export(
+        output_dir / "sessions.parquet",
+        sessions,
+    )
+
+    print("Exported sessions.parquet")
+
+    print("Exported clusters.json")
 
     print(f"Recorded {len(ledger):,} payload hashes")
 
