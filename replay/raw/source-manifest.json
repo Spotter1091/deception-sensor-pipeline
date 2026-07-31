@@ -1,0 +1,14 @@
+{
+  "files": [
+    {
+      "path": "honeypot-replay.jsonl",
+      "bytes": 87933070,
+      "sha256": "774d678560254c2518744c452b8d71cc626f78d27876c00b1a995efcfd001adb"
+    },
+    {
+      "path": "replay-interface.json",
+      "bytes": 252,
+      "sha256": "0e3d8256c7c38fe266411904b3b98d162199dc4f20f668b585e8bf5278e2925c"
+    }
+  ]
+}

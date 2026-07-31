@@ -1,0 +1,14 @@
+{
+  "schema_versions": [
+    "1",
+    "2"
+  ],
+  "ordering": "events are deliberately unordered within 5,000-row blocks",
+  "session_keys": [
+    "connection_id",
+    "source_ip",
+    "protocol",
+    "sensor_time"
+  ],
+  "marker": "UBI-A6-SHARED-B1"
+}
