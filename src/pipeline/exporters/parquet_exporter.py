@@ -23,7 +23,6 @@ class ParquetExporter(BaseExporter):
         rows = []
 
         for session in sessions:
-
             rows.append(
                 {
                     "session_id": session.session_id,

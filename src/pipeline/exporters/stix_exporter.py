@@ -19,7 +19,6 @@ class STIXExporter:
             "w",
             encoding="utf-8",
         ) as outfile:
-
             json.dump(
                 bundle,
                 outfile,

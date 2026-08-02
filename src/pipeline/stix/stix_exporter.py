@@ -21,4 +21,3 @@ class STIXExporter:
                 indent=2,
             )
         )
-

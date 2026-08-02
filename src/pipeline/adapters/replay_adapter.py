@@ -10,7 +10,6 @@ from pipeline.models.event import NormalizedEvent
 
 
 class ReplayAdapter(BaseAdapter):
-
     def __init__(self, replay_file: Path):
         self.replay_file = replay_file
 
@@ -19,9 +18,7 @@ class ReplayAdapter(BaseAdapter):
             "r",
             encoding="utf-8",
         ) as infile:
-
             for line in infile:
-
                 if not line.strip():
                     continue
 

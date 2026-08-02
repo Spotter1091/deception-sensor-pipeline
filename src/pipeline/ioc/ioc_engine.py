@@ -25,9 +25,7 @@ class IOCEngine:
         ioc_map: dict[tuple[str, str], IOC] = {}
 
         for event in events:
-
             for ioc in self._extract_all(event):
-
                 key = (ioc.indicator_type, ioc.value)
 
                 existing = ioc_map.get(key)
@@ -41,7 +39,6 @@ class IOCEngine:
 
         return list(ioc_map.values())
 
-
     def _extract_all(
         self,
         event: NormalizedEvent,
@@ -49,18 +46,14 @@ class IOCEngine:
 
         iocs: list[IOC] = []
 
-        
         for extractor in self.extractors:
-
             indicator = extractor.extract(event)
 
             if indicator is not None:
                 iocs.append(indicator)
 
-
         return iocs
 
-    
     def __init__(self) -> None:
 
         self.extractors = [
@@ -68,4 +61,4 @@ class IOCEngine:
             UsernameExtractor(),
             SHA256Extractor(),
             CommandExtractor(),
-    ]
+        ]

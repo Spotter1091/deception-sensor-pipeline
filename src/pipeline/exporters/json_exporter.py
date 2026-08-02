@@ -22,7 +22,6 @@ class JSONExporter(BaseExporter):
             "w",
             encoding="utf-8",
         ) as outfile:
-
             json.dump(
                 data,
                 outfile,

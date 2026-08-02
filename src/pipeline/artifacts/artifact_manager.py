@@ -32,12 +32,12 @@ class ArtifactManager:
         clusters,
         iocs,
         sessions,
+        isolation,
     ) -> None:
 
         stix_bundle = STIXBuilder().build(iocs)
 
         for exporter, filename in self.registry.exporters:
-
             output = self.output_directory / filename
 
             if filename == "hash-ledger.csv":
@@ -49,7 +49,11 @@ class ArtifactManager:
             elif filename == "clusters.json":
                 exporter.export(output, clusters)
 
+            elif filename == "isolation-results.json":
+                exporter.export(output, isolation)
+
             elif filename == "stix-bundle.json":
                 exporter.export(output, stix_bundle)
+
             elif filename == "iocs.csv":
                 exporter.export(output, iocs)

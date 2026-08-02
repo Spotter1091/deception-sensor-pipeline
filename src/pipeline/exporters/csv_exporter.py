@@ -23,7 +23,6 @@ class CSVExporter(BaseExporter):
             newline="",
             encoding="utf-8",
         ) as outfile:
-
             writer = csv.writer(outfile)
 
             writer.writerow(
@@ -37,7 +36,6 @@ class CSVExporter(BaseExporter):
             )
 
             for payload in ledger:
-
                 writer.writerow(
                     [
                         payload.sha256,

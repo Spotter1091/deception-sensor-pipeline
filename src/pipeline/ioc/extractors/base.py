@@ -20,4 +20,3 @@ class BaseIOCExtractor(ABC):
         Return an IOC if one can be extracted.
         """
         raise NotImplementedError
-

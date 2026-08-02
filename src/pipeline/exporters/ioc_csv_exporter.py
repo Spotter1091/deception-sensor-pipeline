@@ -23,7 +23,6 @@ class IOCCSVExporter(BaseExporter):
             newline="",
             encoding="utf-8",
         ) as file:
-
             writer = csv.writer(file)
 
             writer.writerow(
@@ -38,7 +37,6 @@ class IOCCSVExporter(BaseExporter):
             )
 
             for ioc in iocs:
-
                 writer.writerow(
                     [
                         ioc.indicator_type,

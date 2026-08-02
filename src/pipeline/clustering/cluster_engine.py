@@ -19,7 +19,6 @@ class ClusterEngine:
         grouped = defaultdict(list)
 
         for session in sessions:
-
             username = None
 
             for event in session.events:
@@ -42,7 +41,6 @@ class ClusterEngine:
             source_ip,
             username,
         ), grouped_sessions in grouped.items():
-
             cluster = Cluster(
                 cluster_id=f"{protocol}:{source_ip}:{username}",
                 protocol=protocol,

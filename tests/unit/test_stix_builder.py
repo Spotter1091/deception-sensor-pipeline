@@ -28,9 +28,7 @@ def test_build_indicator():
 
     assert indicator["type"] == "indicator"
 
-    assert indicator["pattern"] == (
-        "[ipv4-addr:value = '203.0.113.5']"
-    )
+    assert indicator["pattern"] == ("[ipv4-addr:value = '203.0.113.5']")
 
     assert indicator["labels"] == [
         "ip",

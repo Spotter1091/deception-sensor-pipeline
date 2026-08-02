@@ -27,9 +27,6 @@ class STIXBuilder:
         indicators = []
 
         for ioc in iocs:
-
-            indicators.append(
-                self.indicator_builder.build(ioc)
-            )
+            indicators.append(self.indicator_builder.build(ioc))
 
         return self.bundle_builder.build(indicators)

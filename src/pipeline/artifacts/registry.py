@@ -18,9 +18,13 @@ class ExportRegistry:
     """
 
     def __init__(self) -> None:
+
+        json_exporter = JSONExporter()
+
         self._exporters: list[tuple[Any, str]] = [
             (CSVExporter(), "hash-ledger.csv"),
-            (JSONExporter(), "clusters.json"),
+            (json_exporter, "clusters.json"),
+            (json_exporter, "isolation-results.json"),
             (ParquetExporter(), "sessions.parquet"),
             (STIXExporter(), "stix-bundle.json"),
             (IOCCSVExporter(), "iocs.csv"),

@@ -17,7 +17,6 @@ class HashEngine:
         ledger = []
 
         for event in events:
-
             if not event.payload_sha256:
                 continue
 

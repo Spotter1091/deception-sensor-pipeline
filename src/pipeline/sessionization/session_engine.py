@@ -23,7 +23,6 @@ class SessionEngine:
 
         # Group events
         for event in events:
-
             key = (
                 event.connection_id,
                 event.source_ip,
@@ -36,7 +35,6 @@ class SessionEngine:
 
         # Build Session objects
         for session_events in grouped.values():
-
             session_events.sort(key=lambda e: e.sensor_time)
 
             first = session_events[0]
